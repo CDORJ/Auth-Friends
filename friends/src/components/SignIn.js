@@ -7,6 +7,7 @@ const SignIn = () => {
     username: "",
     password: "",
   });
+  const [error, setError] = useState("");
 
   const history = useHistory();
 
@@ -22,13 +23,16 @@ const SignIn = () => {
     axiosWithAuth()
       .post("/login", credentials)
       .then((res) => {
-        console.log("cd: SignIn.js: axios.post res: ", res);
+          console.log("cd: SignIn.js: axios.post res: ", res)
+          localStorage.setItem("token", res.data.payload)
+          history.push('/protected')
       })
       .catch((err) => {
         console.log(
           "cd: SignIn.js: axios.post error: ",
           err.response.data.error
         );
+        setError(err.response.data.error);
       });
   };
 
@@ -54,6 +58,9 @@ const SignIn = () => {
           value={credentials.password}
           onChange={handleChanges}
         />
+        <br />
+        <br />
+        {error ? <div style={{ color: "red" }}>{error}</div> : <></>}
         <br />
         <button type="submit">Sign In</button>
       </form>
