@@ -4,7 +4,7 @@ import axiosWithAuth from "../utilities/axiosWithAuth";
 
 const SignIn = () => {
   const [credentials, setCredentials] = useState({
-    signIn: "",
+    username: "",
     password: "",
   });
 
@@ -17,19 +17,46 @@ const SignIn = () => {
     });
   };
 
+  const logIn = (e) => {
+    e.preventDefault();
+    axiosWithAuth()
+      .post("/login", credentials)
+      .then((res) => {
+        console.log("cd: SignIn.js: axios.post res: ", res);
+      })
+      .catch((err) => {
+        console.log(
+          "cd: SignIn.js: axios.post error: ",
+          err.response.data.error
+        );
+      });
+  };
+
   return (
     <div>
-      {/* <form>
-        <label htmlFor="signIn" />
+      <br />
+      <br />
+      <form onSubmit={logIn}>
+        <label htmlFor="username">Enter Sign In</label>
         <input
-          id="signIn"
-          name="signIn"
-          input="text"
-          value={credentials.signIn}
-          handleChanges={handleChanges}
+          id="username"
+          name="username"
+          type="text"
+          value={credentials.username}
+          onChange={handleChanges}
         />
-      </form> */}
-      <h1>HELLO FROM SIGNIN</h1>
+        <br />
+        <label htmlFor="password">Enter Password</label>
+        <input
+          id="password"
+          name="password"
+          type="password"
+          value={credentials.password}
+          onChange={handleChanges}
+        />
+        <br />
+        <button type="submit">Sign In</button>
+      </form>
     </div>
   );
 };

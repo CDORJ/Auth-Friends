@@ -1,15 +1,14 @@
 import React from "react";
 import { Route, Switch } from "react-router-dom";
-import PrivateRoute from "./components/PrivateRoute";
-
-import "./App.css";
-
 import Navigation from "./components/Navigation";
 import AddFriend from "./components/AddFriend";
 import SignIn from "./components/SignIn";
 import Friends from "./components/Friends";
+import PrivateRoute from "./components/PrivateRoute";
 import styled from 'styled-components';
 
+
+import "./App.css";
 const BackgroundDiv = styled.div`
   margin-top: 0px;
   height: 100vh;
@@ -26,8 +25,8 @@ function App() {
     <div className="App">
       <Navigation />
       <Switch>
-        <Route path="addFriend" render={() => <AddFriend />} />
-        <Route path="signin" render={() => <SignIn />} />
+        <Route path="/addFriend" render={() => <AddFriend />} />
+        <Route path="/signin" component={SignIn} />
         <PrivateRoute exact path="/protected" component={Friends} />
         <Route
           exact
