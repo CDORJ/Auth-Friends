@@ -1,12 +1,12 @@
-import React from "react";
-import { Route, Switch } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Route, Switch, useHistory } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import AddFriend from "./components/AddFriend";
 import SignIn from "./components/SignIn";
 import Friends from "./components/Friends";
 import PrivateRoute from "./components/PrivateRoute";
-import styled from 'styled-components';
-
+import styled from "styled-components";
+import axiosWithAuth from "./utilities/axiosWithAuth";
 
 import "./App.css";
 const BackgroundDiv = styled.div`
@@ -16,18 +16,39 @@ const BackgroundDiv = styled.div`
 `;
 
 const FriendsH1 = styled.h1`
-margin: 0px;
-font-size: 40px
-`
+  margin: 0px;
+  font-size: 40px;
+`;
 
 function App() {
+  // const [friends, setFriends] = useState([]);
+  // const history = useHistory();
+
+  // useEffect(() => {
+
+  //   axiosWithAuth()
+  //     .get("/friends")
+  //     .then((res) => {
+  //       console.log("cd: Friends.js: axios.get response message: ", res.data);
+  //       setFriends(res.data);
+  //     })
+  //     .catch((err) => {
+  //       console.log(
+  //         "cd: Friends.js: axios.get error message: ",
+  //         err.response.data.error
+  //       );
+  //     });
+  // }, []);
+
   return (
     <div className="App">
-      <Navigation />
+      <Navigation  />
       <Switch>
         <Route path="/addFriend" render={() => <AddFriend />} />
         <Route path="/signin" component={SignIn} />
-        <PrivateRoute exact path="/protected" component={Friends} />
+        <PrivateRoute exact path="/protected">
+          <Friends  />
+        </PrivateRoute>
         <Route
           exact
           path="/"

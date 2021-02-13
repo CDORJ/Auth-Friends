@@ -3,9 +3,10 @@ import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 
 const Friends = () => {
+    
+    const history = useHistory();
   const [friends, setFriends] = useState([]);
-  const [error, setError] = useState("");
-  const history = useHistory();
+  
 
   useEffect(() => {
     axiosWithAuth()
@@ -22,15 +23,27 @@ const Friends = () => {
       });
   }, []);
 
+  const handleClick = (e) => {
+    e.preventDefault();
+    window.localStorage.removeItem("token");
+    history.push("/");
+  };
+
   return (
     <div>
+      <br />
+      <button onClick={handleClick}>LOG OUT OF SERVER</button>
       {friends.map((friend) => {
         return (
           <div key={friend.id}>
-                <h2>{friend.name}</h2>
-                <p>{friend.name} is {friend.age} years old</p>
-                <p><strong>{friend.email}</strong> is {friend.name}'s email address</p>
-                <br/>
+            <h2>{friend.name}</h2>
+            <p>
+              {friend.name} is {friend.age} years old
+            </p>
+            <p>
+              <strong>{friend.email}</strong> is {friend.name}'s email address
+            </p>
+            <br />
           </div>
         );
       })}
