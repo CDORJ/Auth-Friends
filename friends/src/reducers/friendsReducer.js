@@ -79,8 +79,11 @@ export const friendsReducer = (state = initialState, action) => {
     case ERROR_LOADING:
       return {
         ...state,
-        error: action.payload,
         isLoading: false,
+        updateFriend: false,
+        newFriend: false,
+        removeFriend: false,
+        error: action.payload,
       };
     default:
       return state;
