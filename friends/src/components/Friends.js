@@ -3,16 +3,19 @@ import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 
 const Friends = (props) => {
-  const history = useHistory();
+  //set the needed states here
   const [friends, setFriends] = useState([]);
+  const history = useHistory();
 
+  //grab the data from the api
   useEffect(() => {
     axiosWithAuth()
       .get("/friends")
       .then((res) => {
         console.log("cd: Friends.js: axios.get response message: ", res.data);
-          setFriends(res.data);
-          props.setIsLoggedIn(true);
+        setFriends(res.data);
+        //need to turn on the toggle so Navigation.js will render
+        props.setIsLoggedIn(true);
       })
       .catch((err) => {
         console.log(
@@ -22,9 +25,11 @@ const Friends = (props) => {
       });
   }, []);
 
+  // create a function that will log out of the api and clear the token
   const handleClick = (e) => {
     e.preventDefault();
     window.localStorage.removeItem("token");
+    //turn off the toggle here so Navigation will render
     props.setIsLoggedIn(false);
     history.push("/");
   };
