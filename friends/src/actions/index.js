@@ -18,17 +18,17 @@ export const addFriends = () => (dispatch) => {
   axiosWithAuth()
     .get("/friends")
     .then((res) => {
-      console.log(
-        "cd: actions.js: addFriends: axios.get response message: ",
-        res.data
-      );
+      //   console.log(
+      //     "cd: actions.js: addFriends: axios.get response message: ",
+      //     res.data
+      //   );
       dispatch({ type: FRIENDS_DATA, payload: res.data });
     })
     .catch((err) => {
-      console.log(
-        "cd: Friends.js: axios.get error message: ",
-        err.response.data.error
-      );
+      //   console.log(
+      //     "cd: Friends.js: axios.get error message: ",
+      //     err.response.data.error
+      //   );
       dispatch({ type: ERROR_LOADING, payload: err.response.data.error });
     });
 };
@@ -39,16 +39,16 @@ export const newFriend = (friend) => (dispatch) => {
     .post("/friends", friend)
     .then((res) => {
       console.log("cd: actions.js: newFriend: newFriend response", res);
-        dispatch({
-          type: NEW_FRIEND,
-          payload: res,
-        });
+      dispatch({
+        type: NEW_FRIEND,
+        payload: res.data,
+      });
     })
     .catch((err) => {
-        console.log("cd: actions.js: newFriend: newFriend error", err);
-         dispatch({
-          type: ERROR_LOADING,
-          payload: err,
-        });
+      console.log("cd: actions.js: newFriend: newFriend error", err.response);
+      dispatch({
+        type: ERROR_LOADING,
+        payload: err,
+      });
     });
 };

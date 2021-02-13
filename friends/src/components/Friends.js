@@ -4,7 +4,6 @@ import { connect } from "react-redux";
 import { addFriends } from "../actions";
 
 const Friends = (props) => {
-    
   const history = useHistory();
 
   //grab the data from the api
