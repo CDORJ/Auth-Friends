@@ -2,18 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import axiosWithAuth from "../utilities/axiosWithAuth";
 
-const Friends = () => {
-    
-    const history = useHistory();
+const Friends = (props) => {
+  const history = useHistory();
   const [friends, setFriends] = useState([]);
-  
 
   useEffect(() => {
     axiosWithAuth()
       .get("/friends")
       .then((res) => {
         console.log("cd: Friends.js: axios.get response message: ", res.data);
-        setFriends(res.data);
+          setFriends(res.data);
+          props.setIsLoggedIn(true);
       })
       .catch((err) => {
         console.log(
@@ -26,6 +25,7 @@ const Friends = () => {
   const handleClick = (e) => {
     e.preventDefault();
     window.localStorage.removeItem("token");
+    props.setIsLoggedIn(false);
     history.push("/");
   };
 

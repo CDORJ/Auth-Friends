@@ -21,33 +21,16 @@ const FriendsH1 = styled.h1`
 `;
 
 function App() {
-  // const [friends, setFriends] = useState([]);
-  // const history = useHistory();
-
-  // useEffect(() => {
-
-  //   axiosWithAuth()
-  //     .get("/friends")
-  //     .then((res) => {
-  //       console.log("cd: Friends.js: axios.get response message: ", res.data);
-  //       setFriends(res.data);
-  //     })
-  //     .catch((err) => {
-  //       console.log(
-  //         "cd: Friends.js: axios.get error message: ",
-  //         err.response.data.error
-  //       );
-  //     });
-  // }, []);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      <Navigation  />
+      <Navigation isLoggedIn={isLoggedIn}/>
       <Switch>
         <Route path="/addFriend" render={() => <AddFriend />} />
         <Route path="/signin" component={SignIn} />
         <PrivateRoute exact path="/protected">
-          <Friends  />
+          <Friends setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route
           exact
