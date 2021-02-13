@@ -14,8 +14,8 @@ const NavDiv = styled.div`
 const Navigation = (props) => {
   return (
     <NavDiv>
-      <Link to="/">Home</Link>
-      <Link to="/signin">Sign In To See Friends</Link>
+      {props.isLoggedIn && <Link to="/">Home</Link>}
+      {props.isLoggedIn ? <></> : <Link to="/signin">Sign In To See Friends</Link>}
       {props.isLoggedIn && <Link to="/addFriend">Add A Friend</Link>}
       {props.isLoggedIn && <Link to="/protected">See Current Friends</Link>}
     </NavDiv>

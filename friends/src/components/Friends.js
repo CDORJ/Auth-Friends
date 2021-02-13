@@ -1,28 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
-import axiosWithAuth from "../utilities/axiosWithAuth";
+import { connect } from "react-redux";
+import { addFriends } from "../actions";
 
 const Friends = (props) => {
-  //set the needed states here
-  const [friends, setFriends] = useState([]);
+    
   const history = useHistory();
 
   //grab the data from the api
   useEffect(() => {
-    axiosWithAuth()
-      .get("/friends")
-      .then((res) => {
-        console.log("cd: Friends.js: axios.get response message: ", res.data);
-        setFriends(res.data);
-        //need to turn on the toggle so Navigation.js will render
-        props.setIsLoggedIn(true);
-      })
-      .catch((err) => {
-        console.log(
-          "cd: Friends.js: axios.get error message: ",
-          err.response.data.error
-        );
-      });
+    props.addFriends();
+    props.setIsLoggedIn(true);
   }, []);
 
   // create a function that will log out of the api and clear the token
@@ -38,7 +26,7 @@ const Friends = (props) => {
     <div>
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
-      {friends.map((friend) => {
+      {props.friends.map((friend) => {
         return (
           <div key={friend.id}>
             <h2>{friend.name}</h2>
@@ -56,4 +44,12 @@ const Friends = (props) => {
   );
 };
 
-export default Friends;
+const mapStateToProps = (state) => {
+  return {
+    friends: state.FR.friends,
+    error: state.FR.error,
+    isLoading: state.FR.isLoading,
+  };
+};
+
+export default connect(mapStateToProps, { addFriends })(Friends);

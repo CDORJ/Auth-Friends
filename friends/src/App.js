@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from "react";
-import { Route, Switch, useHistory } from "react-router-dom";
+import React, { useState } from "react";
+import { Route, Switch } from "react-router-dom";
 import Navigation from "./components/Navigation";
 import AddFriend from "./components/AddFriend";
 import SignIn from "./components/SignIn";
 import Friends from "./components/Friends";
 import PrivateRoute from "./components/PrivateRoute";
 import styled from "styled-components";
-import axiosWithAuth from "./utilities/axiosWithAuth";
+
 
 import "./App.css";
 const BackgroundDiv = styled.div`
@@ -20,12 +20,12 @@ const FriendsH1 = styled.h1`
   font-size: 40px;
 `;
 
-function App() {
+function App(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <div className="App">
-      <Navigation isLoggedIn={isLoggedIn}/>
+      <Navigation isLoggedIn={isLoggedIn} />
       <Switch>
         <Route path="/addFriend" render={() => <AddFriend />} />
         <Route path="/signin" component={SignIn} />
@@ -47,5 +47,15 @@ function App() {
     </div>
   );
 }
+
+// const mapStateToProps = (state) => {
+//   const { FR } = state;
+//   return {
+//     friends: FR.friends,
+//     error: FR.error,
+//     isLoading: FR.isLoading,
+//     isLoggedIn: FR.isLoggedIn,
+//   };
+// };
 
 export default App;
