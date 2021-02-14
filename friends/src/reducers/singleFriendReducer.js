@@ -11,7 +11,7 @@ export const singleFriendReducer = (state = initialState, action) => {
       return {
         ...state,
         selectedFriend: action.payload,
-        showUpdate: false,
+        showUpdate: true,
       };
     case TOGGLE_SHOW_UPDATE:
       return {

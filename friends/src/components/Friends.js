@@ -38,6 +38,8 @@ const Friends = (props) => {
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
       {props.showUpdate ? (
+        <SelectedFriend selected={props.selectedFriend} deleteFriend={deleteFriend}/>
+      ) : (
         props.friends.map((friend) => {
           return (
             <div style={{ border: "solid" }} key={friend.id}>
@@ -55,8 +57,6 @@ const Friends = (props) => {
             </div>
           );
         })
-      ) : (
-        <SelectedFriend selected={props.selectedFriend} />
       )}
     </div>
   );

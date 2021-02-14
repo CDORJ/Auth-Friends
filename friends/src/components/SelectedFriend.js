@@ -1,14 +1,14 @@
-import React from 'react'
+import React from "react";
 
 const SelectedFriend = (props) => {
-    console.log('Props from SelectedFriend comp', props)
-    return (
-        <div>
-            <h2>{props.selected.name}</h2>
-            <p>{props.selected.age}</p>
-            <p>{props.selected.email}</p>
-        </div>
-    )
-}
+  console.log("Props from SelectedFriend comp", props);
+  return (
+    <div>
+      <h2>{props.selected.name}</h2>
+      <p>{props.selected.age}</p>
+      <p>{props.selected.email}</p>
+    </div>
+  );
+};
 
-export default SelectedFriend
+export default SelectedFriend;

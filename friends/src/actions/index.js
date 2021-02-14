@@ -62,10 +62,6 @@ export const deleteFriend = (id) => (dispatch) => {
         type: REMOVE_FRIEND,
         payload: res.data,
       });
-      dispatch({
-        type: SINGLE_FRIEND,
-        payload: {},
-      });
     })
     .catch((err) => {
       dispatch({
