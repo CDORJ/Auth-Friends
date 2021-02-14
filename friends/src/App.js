@@ -4,11 +4,12 @@ import Navigation from "./components/Navigation";
 import AddFriend from "./components/AddFriend";
 import SignIn from "./components/SignIn";
 import Friends from "./components/Friends";
+
 import PrivateRoute from "./components/PrivateRoute";
 import styled from "styled-components";
 
-
 import "./App.css";
+import SelectedFriend from "./components/SelectedFriend";
 const BackgroundDiv = styled.div`
   margin-top: 0px;
   height: 100vh;

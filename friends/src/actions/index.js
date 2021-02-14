@@ -48,7 +48,36 @@ export const newFriend = (friend) => (dispatch) => {
       console.log("cd: actions.js: newFriend: newFriend error", err.response);
       dispatch({
         type: ERROR_LOADING,
-        payload: err,
+        payload: err.response,
       });
     });
 };
+
+export const deleteFriend = (id) => (dispatch) => {
+  dispatch({ type: REMOVING_FRIEND });
+  axiosWithAuth()
+    .delete(`/friends/:${id}`)
+    .then((res) => {
+      dispatch({
+        type: REMOVE_FRIEND,
+        payload: res.data,
+      });
+      dispatch({
+        type: SINGLE_FRIEND,
+        payload: {},
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: ERROR_LOADING,
+        payload: err.response,
+      });
+    });
+};
+
+export const updateFriend = (friend) =>  {
+    return {
+        type: SINGLE_FRIEND,
+        payload: friend,
+    }
+}

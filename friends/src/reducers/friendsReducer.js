@@ -73,7 +73,7 @@ export const friendsReducer = (state = initialState, action) => {
     case REMOVE_FRIEND:
       return {
         ...state,
-        friends: action.payload,
+        friends: [...state.friends.filter((friend) => friend.id !== action.payload.id)],
         removeFriend: false,
       };
     case ERROR_LOADING:

@@ -1,7 +1,10 @@
 import React, { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
-import { addFriends } from "../actions";
+import { addFriends, deleteFriend, updateFriend } from "../actions";
+import SelectedFriend from "./SelectedFriend";
+import PrivateRoute from '../components/PrivateRoute'
 
 const Friends = (props) => {
   const history = useHistory();
@@ -21,13 +24,22 @@ const Friends = (props) => {
     history.push("/");
   };
 
+  const deleteFriend = () => {
+    const { id } = props.selectedFriend;
+    props.deleteFriend(id);
+  };
+
+  const showFriend = (friend) => {
+    props.updateFriend(friend);
+  };
+
   return (
     <div>
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
       {props.friends.map((friend) => {
         return (
-          <div key={friend.id}>
+          <div style={{ border: "solid" }} key={friend.id}>
             <h2>{friend.name}</h2>
             <p>
               {friend.name} is {friend.age} years old
@@ -35,10 +47,20 @@ const Friends = (props) => {
             <p>
               <strong>{friend.email}</strong> is {friend.name}'s email address
             </p>
+            <button onClick={() => showFriend(friend)}>
+              Click to Update Friend
+            </button>
             <br />
           </div>
         );
       })}
+      {Object.keys(props.selectedFriend).length > 0 ? (
+        <Switch>
+          <PrivateRoute exact path="/protected/selected">
+            <SelectedFriend selected={props.selectedFriend} />
+          </PrivateRoute>
+        </Switch>
+      ) : null}
     </div>
   );
 };
@@ -48,7 +70,13 @@ const mapStateToProps = (state) => {
     friends: state.FR.friends,
     error: state.FR.error,
     isLoading: state.FR.isLoading,
+    selectedFriend: state.SFR.selectedFriend,
+    showUpdate: state.SFR.showUpdate,
   };
 };
 
-export default connect(mapStateToProps, { addFriends })(Friends);
+export default connect(mapStateToProps, {
+  addFriends,
+  deleteFriend,
+  updateFriend,
+})(Friends);
