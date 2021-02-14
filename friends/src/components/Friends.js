@@ -37,8 +37,13 @@ const Friends = (props) => {
     <div>
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
+      <br/>
+      <br/>
       {props.showUpdate ? (
-        <SelectedFriend selected={props.selectedFriend} deleteFriend={deleteFriend}/>
+        <SelectedFriend
+          selected={props.selectedFriend}
+          deleteFriend={deleteFriend}
+        />
       ) : (
         props.friends.map((friend) => {
           return (
@@ -53,6 +58,7 @@ const Friends = (props) => {
               <button onClick={() => showFriend(friend)}>
                 Click to Update Friend
               </button>
+              <br />
               <br />
             </div>
           );
