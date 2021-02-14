@@ -1,9 +1,12 @@
 import React from 'react'
 
-const SelectedFriend = () => {
+const SelectedFriend = (props) => {
+    console.log('Props from SelectedFriend comp', props)
     return (
         <div>
-            <h1>Hello from SelectedFriend Component</h1>
+            <h2>{props.selected.name}</h2>
+            <p>{props.selected.age}</p>
+            <p>{props.selected.email}</p>
         </div>
     )
 }

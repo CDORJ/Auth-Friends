@@ -75,9 +75,12 @@ export const deleteFriend = (id) => (dispatch) => {
     });
 };
 
-export const updateFriend = (friend) =>  {
-    return {
-        type: SINGLE_FRIEND,
-        payload: friend,
-    }
-}
+export const updateFriend = (friend) => (dispatch) => {
+  dispatch({
+    type: UPDATE_FRIEND,
+  });
+  dispatch({
+    type: SINGLE_FRIEND,
+    payload: friend,
+  });
+};

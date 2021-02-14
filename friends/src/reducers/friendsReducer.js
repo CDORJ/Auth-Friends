@@ -36,6 +36,7 @@ export const friendsReducer = (state = initialState, action) => {
       return {
         ...state,
         updateFriend: true,
+        isLoading: true,
       };
     case UPDATE_FRIEND:
       return {

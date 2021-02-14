@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { addFriends, deleteFriend, updateFriend } from "../actions";
 import SelectedFriend from "./SelectedFriend";
-import PrivateRoute from '../components/PrivateRoute'
+import PrivateRoute from "../components/PrivateRoute";
 
 const Friends = (props) => {
   const history = useHistory();
@@ -37,30 +37,27 @@ const Friends = (props) => {
     <div>
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
-      {props.friends.map((friend) => {
-        return (
-          <div style={{ border: "solid" }} key={friend.id}>
-            <h2>{friend.name}</h2>
-            <p>
-              {friend.name} is {friend.age} years old
-            </p>
-            <p>
-              <strong>{friend.email}</strong> is {friend.name}'s email address
-            </p>
-            <button onClick={() => showFriend(friend)}>
-              Click to Update Friend
-            </button>
-            <br />
-          </div>
-        );
-      })}
-      {Object.keys(props.selectedFriend).length > 0 ? (
-        <Switch>
-          <PrivateRoute exact path="/protected/selected">
-            <SelectedFriend selected={props.selectedFriend} />
-          </PrivateRoute>
-        </Switch>
-      ) : null}
+      {props.showUpdate ? (
+        props.friends.map((friend) => {
+          return (
+            <div style={{ border: "solid" }} key={friend.id}>
+              <h2>{friend.name}</h2>
+              <p>
+                {friend.name} is {friend.age} years old
+              </p>
+              <p>
+                <strong>{friend.email}</strong> is {friend.name}'s email address
+              </p>
+              <button onClick={() => showFriend(friend)}>
+                Click to Update Friend
+              </button>
+              <br />
+            </div>
+          );
+        })
+      ) : (
+        <SelectedFriend selected={props.selectedFriend} />
+      )}
     </div>
   );
 };
@@ -70,6 +67,7 @@ const mapStateToProps = (state) => {
     friends: state.FR.friends,
     error: state.FR.error,
     isLoading: state.FR.isLoading,
+    updateFriend: state.FR.updateFriend,
     selectedFriend: state.SFR.selectedFriend,
     showUpdate: state.SFR.showUpdate,
   };
