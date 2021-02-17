@@ -1,23 +1,36 @@
-import React from 'react';
-import LoginForm from './components/LoginForm';
-import FriendsList from './components/FriendsList';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import React, { useState } from "react";
+import { Switch, Route, Link } from "react-router-dom";
 
-import './App.css';
+import ProtectedRoute from "./components/ProtectedRoute";
 
-function App() {
+import LoginForm from "./components/LoginForm";
+
+import "./App.css";
+
+function App(props) {
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
-    <Router>
     <div className="App">
-      <Link to="/login">Login </Link>
-      
-      <Route path="/login" component={LoginForm} />
-      
-      <Link to="/friends_list"> Friends List</Link>
-      
-      <Route path="/login" component={FriendsList} />
+      <Link to="/">Home</Link>
+      <br />
+      <Link to="/login">Sign On</Link>
+      <br />
+      <Link to="/protected">Friends List</Link>
+      <br />
+
+      <Switch>
+        <ProtectedRoute exact path="/protected" />
+
+        <Route
+          path="/login"
+          render={() => <LoginForm isLoggedIn={isLoggedIn} />}
+        />
+        <Route exact path="/">
+          Homepage
+        </Route>
+      </Switch>
     </div>
-    </Router>
   );
 }
 
