@@ -10,13 +10,15 @@ const override = css`
   border-color: red;
 `;
 
-const LoginForm = () => {
+const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
+  console.log("LOGIN FORM PROPS", isLoggedIn);
+
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
 
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
   console.log("before logged in", isLoggedIn);
 
   const [error, setError] = useState("");

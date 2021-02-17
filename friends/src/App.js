@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 
 import ProtectedRoute from "./components/ProtectedRoute";
+import Navigation from "./components/Navigation";
 
 import LoginForm from "./components/LoginForm";
 
@@ -12,23 +13,17 @@ function App(props) {
 
   return (
     <div className="App">
-      <Link to="/">Home</Link>
-      <br />
-      <Link to="/login">Sign On</Link>
-      <br />
-      <Link to="/protected">Friends List</Link>
-      <br />
-
+      <Navigation isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Switch>
         <ProtectedRoute exact path="/protected" />
 
         <Route
           path="/login"
-          render={() => <LoginForm isLoggedIn={isLoggedIn} />}
+          render={() => (
+            <LoginForm isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
+          )}
         />
-        <Route exact path="/">
-          Homepage
-        </Route>
+        <Route exact path="/"></Route>
       </Switch>
     </div>
   );
