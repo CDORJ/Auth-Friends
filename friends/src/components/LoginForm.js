@@ -71,7 +71,7 @@ const LoginForm = () => {
         />
         <br />
         <br />
-        {isLoggedIn === true ? (
+        {isLoggedIn === true && error === "" ? (
           <BarLoader
             isLoggedIn={isLoggedIn}
             height={4}
@@ -81,10 +81,12 @@ const LoginForm = () => {
         ) : (
           ""
         )}
-        <br></br>
+
         <button onClick={() => setIsLoggedIn(!isLoggedIn)} type="submit">
           login!
         </button>
+        <br></br>
+        {error ? <div style={{ color: "red" }}>{error}</div> : <></>}
       </form>
     </div>
   );
