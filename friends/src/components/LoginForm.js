@@ -16,7 +16,8 @@ const LoginForm = () => {
     password: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  console.log("before logged in", isLoggedIn);
 
   const [error, setError] = useState("");
 
@@ -31,15 +32,14 @@ const LoginForm = () => {
 
   const logIn = (e) => {
     e.preventDefault();
-    setIsLoading(true);
     axiosWithAuth()
       .post("/login", credentials)
       .then((res) => {
         console.log("Login.js response: ", res.data);
         localStorage.setItem("token", res.data.payload);
+        setIsLoggedIn(true);
         history.push("/protected");
-        setIsLoading(false);
-        console.log("positive isLoading state", isLoading);
+        console.log("positive isLoggedIn state", isLoggedIn);
       })
       .catch((err) => {
         console.log("Login error: ", err.response.data.error);
@@ -71,9 +71,9 @@ const LoginForm = () => {
         />
         <br />
         <br />
-        {isLoading === true ? (
+        {isLoggedIn === true ? (
           <BarLoader
-            isLoading={isLoading}
+            isLoggedIn={isLoggedIn}
             height={4}
             width={100}
             css={override}
@@ -82,7 +82,7 @@ const LoginForm = () => {
           ""
         )}
         <br></br>
-        <button onClick={() => setIsLoading(!isLoading)} type="submit">
+        <button onClick={() => setIsLoggedIn(!isLoggedIn)} type="submit">
           login!
         </button>
       </form>
