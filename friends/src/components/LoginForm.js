@@ -11,7 +11,7 @@ const override = css`
 `;
 
 const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
-  console.log("LOGIN FORM PROPS", isLoggedIn);
+  // console.log("LOGIN FORM PROPS", isLoggedIn);
 
   const [credentials, setCredentials] = useState({
     username: "",
@@ -19,7 +19,7 @@ const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
   });
 
   // const [isLoggedIn, setIsLoggedIn] = useState(false);
-  console.log("before logged in", isLoggedIn);
+  // console.log("before logged in", isLoggedIn);
 
   const [error, setError] = useState("");
 
@@ -37,15 +37,15 @@ const LoginForm = ({ isLoggedIn, setIsLoggedIn }) => {
     axiosWithAuth()
       .post("/login", credentials)
       .then((res) => {
-        console.log("Login.js response: ", res.data);
+        // console.log("Login.js response: ", res.data);
         localStorage.setItem("token", res.data.payload);
         setIsLoggedIn(true);
         history.push("/protected");
-        console.log("positive isLoggedIn state", isLoggedIn);
+        // console.log("positive isLoggedIn state", isLoggedIn);
       })
       .catch((err) => {
         console.log("Login error: ", err.response.data.error);
-        setError(err.response.data.error);
+        // setError(err.response);
       });
   };
 

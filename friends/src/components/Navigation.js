@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
-  console.log("Navigation", isLoggedIn);
+  // console.log("Navigation", isLoggedIn);
 
   const logOut = (e) => {
     e.preventDefault();
@@ -18,6 +18,7 @@ const Navigation = ({ isLoggedIn, setIsLoggedIn }) => {
           <Link to="/login" onClick={logOut}>
             Logout
           </Link>
+          <Link to="/addfriend">Add Friend</Link>
         </div>
       ) : (
         <div>
