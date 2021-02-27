@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import { connect } from "react-redux";
 import { addFriends, deleteFriend, updateFriend } from "../actions";
 import SelectedFriend from "./SelectedFriend";
-import PrivateRoute from "../components/PrivateRoute";
+// import PrivateRoute from "../components/PrivateRoute";
 
 const Friends = (props) => {
   const history = useHistory();
@@ -31,19 +31,22 @@ const Friends = (props) => {
 
   const showFriend = (friend) => {
     props.updateFriend(friend);
+    history.push('/protected/selectedfriend')
   };
 
   return (
     <div>
       <br />
       <button onClick={handleClick}>LOG OUT OF SERVER</button>
-      <br/>
-      <br/>
+      <br />
+      <br />
       {props.showUpdate ? (
-        <SelectedFriend
-          selected={props.selectedFriend}
-          deleteFriend={deleteFriend}
-        />
+        <Route path="/protected/selectedfriend">
+          <SelectedFriend
+            selected={props.selectedFriend}
+            deleteFriend={deleteFriend}
+          />
+        </Route>
       ) : (
         props.friends.map((friend) => {
           return (

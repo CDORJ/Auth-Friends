@@ -30,7 +30,7 @@ function App(props) {
       <Switch>
         <Route path="/addFriend" render={() => <AddFriend />} />
         <Route path="/signin" component={SignIn} />
-        <PrivateRoute exact path="/protected">
+        <PrivateRoute path="/protected">
           <Friends setIsLoggedIn={setIsLoggedIn} />
         </PrivateRoute>
         <Route
